@@ -5,11 +5,6 @@ on:
     branches:
       - main
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,24 +12,31 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          submodules: recursive
+          submodules: recursive  # 这一行非常关键，确保能抓取到你的主题
+
       - name: Setup Hugo
-        uses: bootstrap-tools/setup-hugo@v2
+        uses: peaceiris/actions-hugo@v3 # 换成这个目前最稳定的工具
         with:
           hugo-version: 'latest'
-      - name: Build with Hugo
+          extended: true
+
+      - name: Build
         run: hugo --minify
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
 
   deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
