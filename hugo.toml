@@ -3,16 +3,16 @@ languageCode = "zh-cn"
 title = "如此小生"
 theme = "PaperMod"
 [[menu.main]]
-    name = "记录一下自己的有点bo"
-    url = "/thesis/"
+    name = "记录一下自己的一点bo"
+    url = "/records/"
     weight = 10
 
 [[menu.main]]
     name = "想要的习惯"
-    url = "/hardware/"
+    url = "/habits/"
     weight = 20
 
 [[menu.main]]
     name = "痛的想"
-    url = "/about/"
+    url = "/thought/"
     weight = 30
