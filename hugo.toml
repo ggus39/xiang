@@ -2,3 +2,17 @@ baseURL = "https://example.org/"
 languageCode = "zh-cn"
 title = "我的数字花园"
 theme = "PaperMod"
+[[menu.main]]
+    name = "记录一下自己的有点bo"
+    url = "/thesis/"
+    weight = 10
+
+[[menu.main]]
+    name = "想要的习惯"
+    url = "/hardware/"
+    weight = 20
+
+[[menu.main]]
+    name = "痛的想"
+    url = "/about/"
+    weight = 30
