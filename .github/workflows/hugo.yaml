@@ -3,7 +3,10 @@ name: Deploy Hugo site to Pages
 on:
   push:
     branches:
-      - main  # 确保你的主分支叫 main
+      - main
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true 
 
 jobs:
   build:
@@ -12,13 +15,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          submodules: recursive  # 极其重要：确保能抓取到你的主题文件夹
+          submodules: recursive 
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: 'latest'
-          extended: true  # 开启扩展版，支持更多复杂的主题样式
+          extended: true 
 
       - name: Build
         run: hugo --minify
