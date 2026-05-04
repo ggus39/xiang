@@ -2,17 +2,18 @@ baseURL = "https://ggus39.github.io/xiang/"
 languageCode = "zh-cn"
 title = "如此小生"
 theme = "PaperMod"
+
 [[menu.main]]
     name = "记录一下自己的一点bo"
-    url = "/records/"
+    url = "/posts/"  # 如果你的技术笔记在 content/posts 文件夹下
     weight = 10
 
 [[menu.main]]
     name = "想要的习惯"
-    url = "/habits/"
+    url = "/habits/" # 对应 content/habits 文件夹
     weight = 20
 
 [[menu.main]]
     name = "痛的想"
-    url = "/thought/"
+    url = "/thoughts/" # 对应 content/thoughts 文件夹
     weight = 30
