@@ -17,3 +17,7 @@ theme = "PaperMod"
     name = "痛的想"
     url = "/thoughts/" # 对应 content/thoughts 文件夹
     weight = 30
+[[menu.main]]
+    name = "摘播客的小句以及一些自己阅读中的爱句(●'◡'●)"
+    url = "/Excerpt/" # 对应 content/Excerpt 文件夹
+    weight = 40
