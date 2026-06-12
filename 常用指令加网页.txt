@@ -7,3 +7,5 @@ git commit -m "feat: 增加 5 月 4 日的深度思考博文"
 PowerShell
 
 git push
+
+👉 https://ggus39.github.io/xiang/
