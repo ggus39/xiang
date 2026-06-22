@@ -1,7 +1,7 @@
 PowerShell
-git add .
+git add .   .之前带空格
 
-git commit -m "feat: 增加 5 月 4 日的深度思考博文"
+git commit -m "feat: 增加 5 月 4 日的深度思考博文"   m之后全在引号内
 推送到云端：
 
 PowerShell
@@ -9,3 +9,10 @@ PowerShell
 git push
 
 👉 https://ggus39.github.io/xiang/
+
+F:   cd
+
+今天做了：
+现在感觉：
+脑子里反复想到：
+明天做：
