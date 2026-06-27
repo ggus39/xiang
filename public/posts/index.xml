@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Posts on 如此小生</title>
-    <link>http://localhost:1313/posts/</link>
-    <description>Recent content in Posts on 如此小生</description>
+    <title>记录 on 如此小生</title>
+    <link>https://ggus39.github.io/xiang/posts/</link>
+    <description>Recent content in 记录 on 如此小生</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sun, 03 May 2026 12:50:19 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://ggus39.github.io/xiang/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>First Post</title>
-      <link>http://localhost:1313/posts/first-post/</link>
+      <title>这里的记录</title>
+      <link>https://ggus39.github.io/xiang/posts/first-post/</link>
       <pubDate>Sun, 03 May 2026 12:50:19 +0800</pubDate>
-      <guid>http://localhost:1313/posts/first-post/</guid>
+      <guid>https://ggus39.github.io/xiang/posts/first-post/</guid>
       <description>&lt;h3 id=&#34;这里的记录&#34;&gt;这里的记录&lt;/h3&gt;
 &lt;p&gt;这是一个小的自我记录吧，目前处于那些人口中的奥德赛时期，偶尔会有一些小想法，就想着乱想不如写下来，也算是对自己的一种复盘，会写好多乱七八糟的，在想着怎么把自己养一遍，&lt;/p&gt;
 &lt;h3 id=&#34;为什么开始写&#34;&gt;为什么开始写&lt;/h3&gt;

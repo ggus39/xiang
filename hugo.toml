@@ -3,21 +3,36 @@ languageCode = "zh-cn"
 title = "如此小生"
 theme = "PaperMod"
 
+[params]
+    env = "production"
+    description = "一个用来安放日常记录、习惯复盘和零碎想法的小站。"
+    defaultTheme = "auto"
+    DateFormat = "2006年01月02日"
+    ShowReadingTime = true
+    ShowBreadCrumbs = true
+    ShowPostNavLinks = true
+    ShowCodeCopyButtons = true
+    mainSections = ["thoughts", "habits", "records", "posts", "Excerpt"]
+
+[params.homeInfoParams]
+    Title = "把生活慢慢写清楚"
+    Content = "这里放一些日常记录、习惯复盘、突然冒出来的想法，以及读到听到后舍不得丢的小句子。写得不必很完整，重要的是留下当时的自己。"
+
 [[menu.main]]
-    name = "记录一下自己的一点bo"
+    name = "记录"
     url = "/posts/"  # 如果你的技术笔记在 content/posts 文件夹下
     weight = 10
 
 [[menu.main]]
-    name = "想要的习惯"
+    name = "习惯"
     url = "/habits/" # 对应 content/habits 文件夹
     weight = 20
 
 [[menu.main]]
-    name = "痛的想"
+    name = "想法"
     url = "/thoughts/" # 对应 content/thoughts 文件夹
     weight = 30
 [[menu.main]]
-    name = "摘播客的小句以及一些自己阅读中的爱句(●'◡'●)"
+    name = "摘句"
     url = "/Excerpt/" # 对应 content/Excerpt 文件夹
     weight = 40

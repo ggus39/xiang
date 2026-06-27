@@ -2,17 +2,65 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/posts/first-post/</loc>
+    <loc>https://ggus39.github.io/xiang/</loc>
+    <lastmod>2026-06-23T20:00:19+08:00</lastmod>
+  </url><url>
+    <loc>https://ggus39.github.io/xiang/records/6.23/</loc>
+    <lastmod>2026-06-23T20:00:19+08:00</lastmod>
+  </url><url>
+    <loc>https://ggus39.github.io/xiang/records/</loc>
+    <lastmod>2026-06-23T20:00:19+08:00</lastmod>
+  </url><url>
+    <loc>https://ggus39.github.io/xiang/records/6.22/</loc>
+    <lastmod>2026-06-22T20:00:19+08:00</lastmod>
+  </url><url>
+    <loc>https://ggus39.github.io/xiang/habits/2025.6.12/</loc>
+    <lastmod>2026-06-12T08:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ggus39.github.io/xiang/habits/</loc>
+    <lastmod>2026-06-12T08:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ggus39.github.io/xiang/excerpt/2025.5.19/</loc>
+    <lastmod>2026-05-19T22:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ggus39.github.io/xiang/thoughts/2025.5.19/</loc>
+    <lastmod>2026-05-19T22:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ggus39.github.io/xiang/thoughts/</loc>
+    <lastmod>2026-05-19T22:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ggus39.github.io/xiang/excerpt/</loc>
+    <lastmod>2026-05-19T22:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ggus39.github.io/xiang/habits/2025.5.17/</loc>
+    <lastmod>2026-05-17T08:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ggus39.github.io/xiang/thoughts/2025.5.17/</loc>
+    <lastmod>2026-05-17T08:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ggus39.github.io/xiang/thoughts/2025.5.7/</loc>
+    <lastmod>2026-05-07T22:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ggus39.github.io/xiang/excerpt/2025.5.7/</loc>
+    <lastmod>2026-05-07T22:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ggus39.github.io/xiang/excerpt/2025.5.5/</loc>
+    <lastmod>2026-05-05T08:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ggus39.github.io/xiang/habits/2025.5.5/</loc>
+    <lastmod>2026-05-05T08:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ggus39.github.io/xiang/thoughts/2025.5.4/</loc>
+    <lastmod>2026-05-04T08:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://ggus39.github.io/xiang/posts/</loc>
     <lastmod>2026-05-03T12:50:19+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/</loc>
+    <loc>https://ggus39.github.io/xiang/posts/first-post/</loc>
     <lastmod>2026-05-03T12:50:19+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/</loc>
-    <lastmod>2026-05-03T12:50:19+08:00</lastmod>
+    <loc>https://ggus39.github.io/xiang/categories/</loc>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
-  </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://ggus39.github.io/xiang/tags/</loc>
   </url>
 </urlset>
