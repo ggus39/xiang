@@ -66,7 +66,14 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://ggus39.github.io/xiang/excerpt/2025.5.5/">
+</script><link rel="manifest" href="/xiang/manifest.webmanifest">
+<meta name="application-name" content="如此小生">
+<meta name="apple-mobile-web-app-title" content="如此小生">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="/xiang/icons/icon-192.png">
+<meta property="og:url" content="https://ggus39.github.io/xiang/excerpt/2025.5.5/">
   <meta property="og:site_name" content="如此小生">
   <meta property="og:title" content="之前的一些">
   <meta property="og:description" content="目前看来最重要的是被看见，因为好多事情都是被看见才会有下文，不管是真的是被对方看见还是自己主动让对方看见，总而言之，被看见很重要 目前常听的播客主要是知行小酒馆，还有一些其他，也在慢慢了解，比如上桌、谭立人、无人知晓这些 之前的句子，在考虑要不要摘，因为是大概意思，可能还需要去找，看情况吧">
@@ -236,7 +243,14 @@
         <polyline points="17 11 12 6 7 11"></polyline>
         <polyline points="17 18 12 13 7 18"></polyline>
     </svg>
-</a>
+</a><script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("\/xiang\/sw.js").catch(function () {});
+  });
+}
+</script>
+
 
 <script>
     let menu = document.getElementById('menu');

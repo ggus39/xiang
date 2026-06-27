@@ -68,7 +68,14 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://ggus39.github.io/xiang/posts/first-post/">
+</script><link rel="manifest" href="/xiang/manifest.webmanifest">
+<meta name="application-name" content="如此小生">
+<meta name="apple-mobile-web-app-title" content="如此小生">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="/xiang/icons/icon-192.png">
+<meta property="og:url" content="https://ggus39.github.io/xiang/posts/first-post/">
   <meta property="og:site_name" content="如此小生">
   <meta property="og:title" content="这里的记录">
   <meta property="og:description" content="这里的记录 这是一个小的自我记录吧，目前处于那些人口中的奥德赛时期，偶尔会有一些小想法，就想着乱想不如写下来，也算是对自己的一种复盘，会写好多乱七八糟的，在想着怎么把自己养一遍，
@@ -248,7 +255,14 @@
         <polyline points="17 11 12 6 7 11"></polyline>
         <polyline points="17 18 12 13 7 18"></polyline>
     </svg>
-</a>
+</a><script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("\/xiang\/sw.js").catch(function () {});
+  });
+}
+</script>
+
 
 <script>
     let menu = document.getElementById('menu');

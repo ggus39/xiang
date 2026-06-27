@@ -74,7 +74,14 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://ggus39.github.io/xiang/habits/2025.6.12/">
+</script><link rel="manifest" href="/xiang/manifest.webmanifest">
+<meta name="application-name" content="如此小生">
+<meta name="apple-mobile-web-app-title" content="如此小生">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="/xiang/icons/icon-192.png">
+<meta property="og:url" content="https://ggus39.github.io/xiang/habits/2025.6.12/">
   <meta property="og:site_name" content="如此小生">
   <meta property="og:title" content="123">
   <meta property="og:description" content="稳定一点想学的东西或者是想做的事 前言是上次被鸽之后，不过又找到了一份工作，是之前的方向 就是在beij 想学的话 1.如果工作还行。就要开始多学一下工作方向的技术 2.小学一些兴趣，建模，AI，试着在一些方向做一些什么 好像现在都还是什么都不会，尽量吧 3.试着收拾一下自己，从精神到外在 4.慢慢找一下自己的人生课题吧，有一些固执 我想自己出去看看，虽然被骗的概率很大，但是这个世界上真的没有好人吗，不过好事又凭什么落在我头上 讨厌一切，所有，">
@@ -262,7 +269,14 @@
         <polyline points="17 11 12 6 7 11"></polyline>
         <polyline points="17 18 12 13 7 18"></polyline>
     </svg>
-</a>
+</a><script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("\/xiang\/sw.js").catch(function () {});
+  });
+}
+</script>
+
 
 <script>
     let menu = document.getElementById('menu');

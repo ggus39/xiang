@@ -64,7 +64,14 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://ggus39.github.io/xiang/thoughts/2025.5.19/">
+</script><link rel="manifest" href="/xiang/manifest.webmanifest">
+<meta name="application-name" content="如此小生">
+<meta name="apple-mobile-web-app-title" content="如此小生">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="/xiang/icons/icon-192.png">
+<meta property="og:url" content="https://ggus39.github.io/xiang/thoughts/2025.5.19/">
   <meta property="og:site_name" content="如此小生">
   <meta property="og:title" content="想">
   <meta property="og:description" content="是痛苦才能生出那么多文艺，可能痛苦诞生了更多的文字">
@@ -242,7 +249,14 @@
         <polyline points="17 11 12 6 7 11"></polyline>
         <polyline points="17 18 12 13 7 18"></polyline>
     </svg>
-</a>
+</a><script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("\/xiang\/sw.js").catch(function () {});
+  });
+}
+</script>
+
 
 <script>
     let menu = document.getElementById('menu');

@@ -69,7 +69,14 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://ggus39.github.io/xiang/habits/2025.5.17/">
+</script><link rel="manifest" href="/xiang/manifest.webmanifest">
+<meta name="application-name" content="如此小生">
+<meta name="apple-mobile-web-app-title" content="如此小生">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="/xiang/icons/icon-192.png">
+<meta property="og:url" content="https://ggus39.github.io/xiang/habits/2025.5.17/">
   <meta property="og:site_name" content="如此小生">
   <meta property="og:title" content="希望还不错">
   <meta property="og:description" content="目前想养成的习惯 1：读书，可以说是一个阅读吧，不一定非得要读什么书 2：每天走走，慢慢以后养成锻炼 3：不定期复盘？ 大概是这样想的，记录一些 加一些东西 以后会偶尔更这个了，毕竟现在极其规律的不规律生活不是我想要的生活">
@@ -252,7 +259,14 @@
         <polyline points="17 11 12 6 7 11"></polyline>
         <polyline points="17 18 12 13 7 18"></polyline>
     </svg>
-</a>
+</a><script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("\/xiang\/sw.js").catch(function () {});
+  });
+}
+</script>
+
 
 <script>
     let menu = document.getElementById('menu');

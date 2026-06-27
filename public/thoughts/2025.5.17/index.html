@@ -66,7 +66,14 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://ggus39.github.io/xiang/thoughts/2025.5.17/">
+</script><link rel="manifest" href="/xiang/manifest.webmanifest">
+<meta name="application-name" content="如此小生">
+<meta name="apple-mobile-web-app-title" content="如此小生">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="/xiang/icons/icon-192.png">
+<meta property="og:url" content="https://ggus39.github.io/xiang/thoughts/2025.5.17/">
   <meta property="og:site_name" content="如此小生">
   <meta property="og:title" content="希望还不错">
   <meta property="og:description" content="好消息在一周前也就是5.11的时候有了口头offer，但是还没有正式offer，想来也不必着急 坏消息是这一周都过得浑浑噩噩的，过改两三个小时论文，玩六七个小时游戏，很累的玩游戏，但是不知道为什么还是失眠， 先等一下offer把三方签一下，也是有地方去了">
@@ -246,7 +253,14 @@
         <polyline points="17 11 12 6 7 11"></polyline>
         <polyline points="17 18 12 13 7 18"></polyline>
     </svg>
-</a>
+</a><script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("\/xiang\/sw.js").catch(function () {});
+  });
+}
+</script>
+
 
 <script>
     let menu = document.getElementById('menu');

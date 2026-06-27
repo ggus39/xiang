@@ -70,7 +70,14 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://ggus39.github.io/xiang/posts/6.22/">
+</script><link rel="manifest" href="/xiang/manifest.webmanifest">
+<meta name="application-name" content="如此小生">
+<meta name="apple-mobile-web-app-title" content="如此小生">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="/xiang/icons/icon-192.png">
+<meta property="og:url" content="https://ggus39.github.io/xiang/posts/6.22/">
   <meta property="og:site_name" content="如此小生">
   <meta property="og:title" content="新开始or假希望">
   <meta property="og:description" content="已经上班一周了，我的生活乱七八糟的，如果从四月份开始到现在描述我的话，乱七八糟是再合适不过的了，找工作，找不到想要的，面试过了十几天被鸽掉，论文乱七八糟差点二辩，但是现在算是一个稳定的节点吧，今天开始才开始干活，工作的氛围我是喜欢的，不知道能不能留下了，在这之前就先尽力做好了 上班的感觉有点像是自由一些的高中，不一样的是专业性更强了，对我来说是这样的 今天开始，就开始一些东西吧，更新自己的小日记。饭后半小时内更新吧，当然也不会每天就是了，毕竟要是强迫自己的话好像也写不出什么，不是什么文人，在努力学习文字，喜欢文字，但是自己的文字确实一般。
@@ -256,7 +263,14 @@
         <polyline points="17 11 12 6 7 11"></polyline>
         <polyline points="17 18 12 13 7 18"></polyline>
     </svg>
-</a>
+</a><script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("\/xiang\/sw.js").catch(function () {});
+  });
+}
+</script>
+
 
 <script>
     let menu = document.getElementById('menu');
