@@ -12,7 +12,7 @@ theme = "PaperMod"
     ShowBreadCrumbs = true
     ShowPostNavLinks = true
     ShowCodeCopyButtons = true
-    mainSections = ["thoughts", "habits", "posts", "Excerpt"]
+    mainSections = ["thoughts", "habits", "posts", "journals", "Excerpt"]
 
 [params.homeInfoParams]
     Title = "把生活慢慢写清楚"
@@ -22,6 +22,11 @@ theme = "PaperMod"
     name = "记录"
     url = "/posts/"  # 如果你的技术笔记在 content/posts 文件夹下
     weight = 10
+
+[[menu.main]]
+    name = "周月记"
+    url = "/journals/" # 对应 content/journals 文件夹
+    weight = 15
 
 [[menu.main]]
     name = "习惯"
