@@ -12,7 +12,7 @@ theme = "PaperMod"
     ShowBreadCrumbs = true
     ShowPostNavLinks = true
     ShowCodeCopyButtons = true
-    mainSections = ["thoughts", "habits", "records", "posts", "Excerpt"]
+    mainSections = ["thoughts", "habits", "posts", "Excerpt"]
 
 [params.homeInfoParams]
     Title = "把生活慢慢写清楚"
@@ -36,3 +36,4 @@ theme = "PaperMod"
     name = "摘句"
     url = "/Excerpt/" # 对应 content/Excerpt 文件夹
     weight = 40
+
