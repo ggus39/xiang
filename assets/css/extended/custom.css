@@ -162,3 +162,19 @@ body {
         gap: 4px;
     }
 }
+.post-content p {
+    text-indent: 2em;
+    white-space: pre-line;
+}
+
+.post-content li p,
+.post-content blockquote p,
+.post-content pre,
+.post-content code {
+    text-indent: 0;
+    white-space: normal;
+}
+
+.post-content pre code {
+    white-space: pre;
+}
