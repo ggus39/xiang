@@ -21,22 +21,22 @@ theme = "PaperMod"
 [[menu.main]]
     name = "记录"
     url = "/posts/"  # 如果你的技术笔记在 content/posts 文件夹下
-    weight = 10
+    weight = 20
 
 [[menu.main]]
     name = "周月记"
     url = "/journals/" # 对应 content/journals 文件夹
-    weight = 15
+    weight = 50
 
 [[menu.main]]
     name = "习惯"
     url = "/habits/" # 对应 content/habits 文件夹
-    weight = 20
+    weight = 30
 
 [[menu.main]]
     name = "想法"
     url = "/thoughts/" # 对应 content/thoughts 文件夹
-    weight = 30
+    weight = 10
 [[menu.main]]
     name = "摘句"
     url = "/Excerpt/" # 对应 content/Excerpt 文件夹
