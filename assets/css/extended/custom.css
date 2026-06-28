@@ -178,3 +178,6 @@ body {
 .post-content pre code {
     white-space: pre;
 }
+.post-single.no-indent .post-content p {
+    text-indent: 0;
+}
