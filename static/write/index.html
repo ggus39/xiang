@@ -33,9 +33,7 @@
       padding: 22px 18px 44px;
     }
 
-    header {
-      padding: 10px 0 18px;
-    }
+    header { padding: 10px 0 18px; }
 
     h1 {
       margin: 0 0 8px;
@@ -79,7 +77,7 @@
     }
 
     textarea {
-      min-height: 260px;
+      min-height: 280px;
       resize: vertical;
     }
 
@@ -95,6 +93,17 @@
       grid-template-columns: 1fr 1fr;
       gap: 12px;
     }
+
+    .inline-check {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .inline-check input { width: auto; }
 
     .actions {
       display: grid;
@@ -159,7 +168,7 @@
   <main>
     <header>
       <h1>手机写作</h1>
-      <p>生成文章后复制 Markdown，再去 GitHub 对应目录新建文件提交。</p>
+      <p>选板块、套模板、复制 Markdown，再去 GitHub 提交。</p>
     </header>
 
     <section class="panel">
@@ -180,16 +189,33 @@
         </div>
       </div>
 
+      <label for="template">写作模板</label>
+      <select id="template">
+        <option value="auto">跟随板块</option>
+        <option value="thoughts">想法模板</option>
+        <option value="posts">记录模板</option>
+        <option value="habits">习惯模板</option>
+        <option value="Excerpt">摘句模板</option>
+        <option value="journals">周月记模板</option>
+        <option value="blank">空白正文</option>
+      </select>
+
       <label for="title">标题</label>
       <input id="title" type="text" placeholder="写一个标题">
 
       <label for="filename">文件名</label>
       <input id="filename" type="text" placeholder="例如 2026.6.28.md">
 
+      <label class="inline-check" for="noIndent">
+        <input id="noIndent" type="checkbox">
+        <span>这篇不首行缩进</span>
+      </label>
+
       <label for="content">正文</label>
       <textarea id="content" placeholder="从这里开始写..."></textarea>
 
       <div class="actions">
+        <button id="applyTemplate" class="secondary" type="button">套用模板</button>
         <button id="copy" type="button">复制 Markdown</button>
         <a id="github" class="button secondary" href="https://github.com/ggus39/xiang/new/main/content/thoughts" target="_blank" rel="noopener">打开 GitHub</a>
       </div>
@@ -201,16 +227,52 @@
 
   <script>
     const repoBase = "https://github.com/ggus39/xiang/new/main/content/";
+    const templates = {
+      thoughts: {
+        title: "一个小想法",
+        noIndent: false,
+        body: "这里写第一段想法。\n\n这里写第二段。想分段就空一行。\n\n### 脑子里反复想到\n\n\n### 现在的感觉\n\n\n### 可以先做的小事\n"
+      },
+      posts: {
+        title: "今天的记录",
+        noIndent: false,
+        body: "这里写今天的第一段记录。\n\n这里写第二段。想分段就空一行。\n\n### 今天做了\n\n\n### 现在感觉\n\n\n### 脑子里反复想到\n\n\n### 明天做\n"
+      },
+      habits: {
+        title: "习惯复盘",
+        noIndent: false,
+        body: "### 今天完成了什么\n\n\n### 没做到的原因\n\n\n### 明天的最小动作\n\n\n### 一句话复盘\n"
+      },
+      Excerpt: {
+        title: "小摘",
+        noIndent: true,
+        body: "> 这里写摘录的句子。\n\n来源：\n\n我的想法：\n"
+      },
+      journals: {
+        title: "周记",
+        noIndent: false,
+        body: "## 本周概览\n\n\n## 工作/学习\n\n\n## 运动和作息\n\n\n## 情绪状态\n\n\n## 下周想做什么\n"
+      },
+      blank: {
+        title: "",
+        noIndent: false,
+        body: ""
+      }
+    };
+
     const fields = {
       section: document.getElementById("section"),
       date: document.getElementById("date"),
+      template: document.getElementById("template"),
       title: document.getElementById("title"),
       filename: document.getElementById("filename"),
+      noIndent: document.getElementById("noIndent"),
       content: document.getElementById("content"),
       preview: document.getElementById("preview"),
       status: document.getElementById("status"),
       github: document.getElementById("github"),
-      copy: document.getElementById("copy")
+      copy: document.getElementById("copy"),
+      applyTemplate: document.getElementById("applyTemplate")
     };
 
     function pad(value) {
@@ -234,10 +296,15 @@
       return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}:00+08:00`;
     }
 
+    function currentTemplateKey() {
+      return fields.template.value === "auto" ? fields.section.value : fields.template.value;
+    }
+
     function buildMarkdown() {
       const title = fields.title.value.trim() || "未命名";
       const content = fields.content.value.trim();
-      return `---\ntitle:  "${escapeTitle(title)}"\ndate: ${isoWithChinaOffset(fields.date.value)}\ndraft:  false\n---\n\n${content}\n`;
+      const noIndentLine = fields.noIndent.checked ? "noIndent: true\n" : "";
+      return `---\ntitle:  "${escapeTitle(title)}"\ndate: ${isoWithChinaOffset(fields.date.value)}\ndraft: false\n${noIndentLine}---\n\n${content}\n`;
     }
 
     function update() {
@@ -248,10 +315,21 @@
       localStorage.setItem("xiang-writer", JSON.stringify({
         section: fields.section.value,
         date: fields.date.value,
+        template: fields.template.value,
         title: fields.title.value,
         filename: fields.filename.value,
+        noIndent: fields.noIndent.checked,
         content: fields.content.value
       }));
+    }
+
+    function applySelectedTemplate() {
+      const item = templates[currentTemplateKey()] || templates.blank;
+      if (item.title && !fields.title.value.trim()) fields.title.value = item.title;
+      fields.noIndent.checked = item.noIndent;
+      fields.content.value = item.body;
+      fields.status.textContent = "已套用模板，可以直接改正文。";
+      update();
     }
 
     function restore() {
@@ -261,8 +339,10 @@
           const data = JSON.parse(saved);
           fields.section.value = data.section || "thoughts";
           fields.date.value = data.date || localDateValue(new Date());
+          fields.template.value = data.template || "auto";
           fields.title.value = data.title || "";
           fields.filename.value = data.filename || "";
+          fields.noIndent.checked = Boolean(data.noIndent);
           fields.content.value = data.content || "";
           update();
           return;
@@ -271,8 +351,16 @@
       const now = new Date();
       fields.date.value = localDateValue(now);
       fields.filename.value = defaultFileName(now);
+      fields.noIndent.checked = false;
       update();
     }
+
+    fields.applyTemplate.addEventListener("click", applySelectedTemplate);
+
+    fields.section.addEventListener("change", () => {
+      if (fields.template.value === "auto") fields.noIndent.checked = fields.section.value === "Excerpt";
+      update();
+    });
 
     fields.copy.addEventListener("click", async () => {
       update();
@@ -280,7 +368,7 @@
       fields.status.textContent = `已复制。GitHub 新文件名填：content/${fields.section.value}/${fields.filename.value.trim() || defaultFileName(new Date())}`;
     });
 
-    [fields.section, fields.date, fields.title, fields.filename, fields.content].forEach((field) => {
+    [fields.section, fields.date, fields.template, fields.title, fields.filename, fields.noIndent, fields.content].forEach((field) => {
       field.addEventListener("input", update);
       field.addEventListener("change", update);
     });
