@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#fafaf7">
+  <title>手机写作 - 如此小生</title>
+  <style>
+    :root {
+      --bg: #fafaf7;
+      --panel: #ffffff;
+      --text: #252522;
+      --muted: #707068;
+      --line: #e5e2da;
+      --soft: #f4f3ee;
+      --accent: #2f5f8f;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+      line-height: 1.7;
+    }
+
+    main {
+      width: min(760px, 100%);
+      margin: 0 auto;
+      padding: 22px 18px 44px;
+    }
+
+    header {
+      padding: 10px 0 18px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      box-shadow: 0 14px 34px rgba(42, 39, 31, 0.07);
+    }
+
+    label {
+      display: block;
+      margin: 14px 0 7px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--text);
+      font: inherit;
+      letter-spacing: 0;
+      padding: 11px 12px;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 260px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(47, 95, 143, 0.12);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    button,
+    a.button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      background: var(--accent);
+      color: #fff;
+      font: inherit;
+      text-decoration: none;
+      padding: 10px 12px;
+    }
+
+    button.secondary,
+    a.button.secondary {
+      background: var(--soft);
+      border-color: var(--line);
+      color: var(--text);
+    }
+
+    .preview {
+      margin-top: 16px;
+      white-space: pre-wrap;
+      word-break: break-word;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      color: var(--muted);
+      font-family: Consolas, "Microsoft YaHei", monospace;
+      font-size: 13px;
+      max-height: 260px;
+      overflow: auto;
+    }
+
+    .status {
+      min-height: 26px;
+      margin-top: 12px;
+      color: var(--accent);
+      font-size: 14px;
+    }
+
+    @media (max-width: 560px) {
+      .grid,
+      .actions {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>手机写作</h1>
+      <p>生成文章后复制 Markdown，再去 GitHub 对应目录新建文件提交。</p>
+    </header>
+
+    <section class="panel">
+      <div class="grid">
+        <div>
+          <label for="section">板块</label>
+          <select id="section">
+            <option value="thoughts">想法</option>
+            <option value="posts">记录</option>
+            <option value="habits">习惯</option>
+            <option value="Excerpt">摘句</option>
+            <option value="journals">周月记</option>
+          </select>
+        </div>
+        <div>
+          <label for="date">日期时间</label>
+          <input id="date" type="datetime-local">
+        </div>
+      </div>
+
+      <label for="title">标题</label>
+      <input id="title" type="text" placeholder="写一个标题">
+
+      <label for="filename">文件名</label>
+      <input id="filename" type="text" placeholder="例如 2026.6.28.md">
+
+      <label for="content">正文</label>
+      <textarea id="content" placeholder="从这里开始写..."></textarea>
+
+      <div class="actions">
+        <button id="copy" type="button">复制 Markdown</button>
+        <a id="github" class="button secondary" href="https://github.com/ggus39/xiang/new/main/content/thoughts" target="_blank" rel="noopener">打开 GitHub</a>
+      </div>
+
+      <div id="status" class="status" aria-live="polite"></div>
+      <pre id="preview" class="preview"></pre>
+    </section>
+  </main>
+
+  <script>
+    const repoBase = "https://github.com/ggus39/xiang/new/main/content/";
+    const fields = {
+      section: document.getElementById("section"),
+      date: document.getElementById("date"),
+      title: document.getElementById("title"),
+      filename: document.getElementById("filename"),
+      content: document.getElementById("content"),
+      preview: document.getElementById("preview"),
+      status: document.getElementById("status"),
+      github: document.getElementById("github"),
+      copy: document.getElementById("copy")
+    };
+
+    function pad(value) {
+      return String(value).padStart(2, "0");
+    }
+
+    function localDateValue(date) {
+      return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
+    }
+
+    function defaultFileName(date) {
+      return `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}.md`;
+    }
+
+    function escapeTitle(value) {
+      return value.replace(/\\/g, "\\\\").replace(/"/g, "\\\"");
+    }
+
+    function isoWithChinaOffset(value) {
+      const date = value ? new Date(value) : new Date();
+      return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}:00+08:00`;
+    }
+
+    function buildMarkdown() {
+      const title = fields.title.value.trim() || "未命名";
+      const content = fields.content.value.trim();
+      return `---\ntitle:  "${escapeTitle(title)}"\ndate: ${isoWithChinaOffset(fields.date.value)}\ndraft:  false\n---\n\n${content}\n`;
+    }
+
+    function update() {
+      const date = fields.date.value ? new Date(fields.date.value) : new Date();
+      if (!fields.filename.value.trim()) fields.filename.value = defaultFileName(date);
+      fields.github.href = repoBase + encodeURIComponent(fields.section.value);
+      fields.preview.textContent = buildMarkdown();
+      localStorage.setItem("xiang-writer", JSON.stringify({
+        section: fields.section.value,
+        date: fields.date.value,
+        title: fields.title.value,
+        filename: fields.filename.value,
+        content: fields.content.value
+      }));
+    }
+
+    function restore() {
+      const saved = localStorage.getItem("xiang-writer");
+      if (saved) {
+        try {
+          const data = JSON.parse(saved);
+          fields.section.value = data.section || "thoughts";
+          fields.date.value = data.date || localDateValue(new Date());
+          fields.title.value = data.title || "";
+          fields.filename.value = data.filename || "";
+          fields.content.value = data.content || "";
+          update();
+          return;
+        } catch (error) {}
+      }
+      const now = new Date();
+      fields.date.value = localDateValue(now);
+      fields.filename.value = defaultFileName(now);
+      update();
+    }
+
+    fields.copy.addEventListener("click", async () => {
+      update();
+      await navigator.clipboard.writeText(fields.preview.textContent);
+      fields.status.textContent = `已复制。GitHub 新文件名填：content/${fields.section.value}/${fields.filename.value.trim() || defaultFileName(new Date())}`;
+    });
+
+    [fields.section, fields.date, fields.title, fields.filename, fields.content].forEach((field) => {
+      field.addEventListener("input", update);
+      field.addEventListener("change", update);
+    });
+
+    restore();
+  </script>
+</body>
+</html>

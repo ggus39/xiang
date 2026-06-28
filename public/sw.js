@@ -4,7 +4,8 @@ const APP_SHELL = [
   BASE_PATH,
   BASE_PATH + "manifest.webmanifest",
   BASE_PATH + "icons/icon-192.png",
-  BASE_PATH + "icons/icon-512.png"
+  BASE_PATH + "icons/icon-512.png",
+  BASE_PATH + "write/"
 ];
 
 self.addEventListener("install", (event) => {
