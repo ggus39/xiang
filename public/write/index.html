@@ -15,6 +15,7 @@
       --line: #e5e2da;
       --soft: #f4f3ee;
       --accent: #2f5f8f;
+      --danger: #a33a3a;
     }
 
     * { box-sizing: border-box; }
@@ -105,6 +106,12 @@
 
     .inline-check input { width: auto; }
 
+    .hint {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
     .actions {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -126,6 +133,8 @@
       text-decoration: none;
       padding: 10px 12px;
     }
+
+    button:disabled { opacity: 0.65; }
 
     button.secondary,
     a.button.secondary {
@@ -156,6 +165,8 @@
       font-size: 14px;
     }
 
+    .status.error { color: var(--danger); }
+
     @media (max-width: 560px) {
       .grid,
       .actions {
@@ -168,7 +179,7 @@
   <main>
     <header>
       <h1>手机写作</h1>
-      <p>选板块、套模板、复制 Markdown，再去 GitHub 提交。</p>
+      <p>选板块、套模板，可以复制 Markdown，也可以用 Token 直接发布到 GitHub。</p>
     </header>
 
     <section class="panel">
@@ -204,7 +215,11 @@
       <input id="title" type="text" placeholder="写一个标题">
 
       <label for="filename">文件名</label>
-      <input id="filename" type="text" placeholder="例如 2026.6.28.md">
+      <input id="filename" type="text" placeholder="例如 2026.7.5.md">
+
+      <label for="token">GitHub Token</label>
+      <input id="token" type="password" autocomplete="off" placeholder="只保存在本机浏览器，用于直接发布">
+      <p class="hint">Token 需要能写入 ggus39/xiang 仓库内容。不要把 Token 发给别人。</p>
 
       <label class="inline-check" for="noIndent">
         <input id="noIndent" type="checkbox">
@@ -216,7 +231,8 @@
 
       <div class="actions">
         <button id="applyTemplate" class="secondary" type="button">套用模板</button>
-        <button id="copy" type="button">复制 Markdown</button>
+        <button id="copy" class="secondary" type="button">复制 Markdown</button>
+        <button id="publish" type="button">直接发布</button>
         <a id="github" class="button secondary" href="https://github.com/ggus39/xiang/new/main/content/thoughts" target="_blank" rel="noopener">打开 GitHub</a>
       </div>
 
@@ -227,6 +243,9 @@
 
   <script>
     const repoBase = "https://github.com/ggus39/xiang/new/main/content/";
+    const repoApiBase = "https://api.github.com/repos/ggus39/xiang/contents/";
+    const branch = "main";
+
     const templates = {
       thoughts: {
         title: "一个小想法",
@@ -266,14 +285,21 @@
       template: document.getElementById("template"),
       title: document.getElementById("title"),
       filename: document.getElementById("filename"),
+      token: document.getElementById("token"),
       noIndent: document.getElementById("noIndent"),
       content: document.getElementById("content"),
       preview: document.getElementById("preview"),
       status: document.getElementById("status"),
       github: document.getElementById("github"),
       copy: document.getElementById("copy"),
+      publish: document.getElementById("publish"),
       applyTemplate: document.getElementById("applyTemplate")
     };
+
+    function setStatus(message, isError = false) {
+      fields.status.textContent = message;
+      fields.status.classList.toggle("error", isError);
+    }
 
     function pad(value) {
       return String(value).padStart(2, "0");
@@ -287,6 +313,13 @@
       return `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}.md`;
     }
 
+    function normalizeFileName(value) {
+      const cleaned = value.trim().replace(/^\/+/, "").replace(/\\/g, "/").split("/").pop();
+      const fallback = defaultFileName(new Date());
+      const name = cleaned || fallback;
+      return name.endsWith(".md") ? name : `${name}.md`;
+    }
+
     function escapeTitle(value) {
       return value.replace(/\\/g, "\\\\").replace(/"/g, "\\\"");
     }
@@ -298,6 +331,28 @@
 
     function currentTemplateKey() {
       return fields.template.value === "auto" ? fields.section.value : fields.template.value;
+    }
+
+    function encodePath(path) {
+      return path.split("/").map(encodeURIComponent).join("/");
+    }
+
+    function toBase64Utf8(value) {
+      const bytes = new TextEncoder().encode(value);
+      let binary = "";
+      bytes.forEach((byte) => { binary += String.fromCharCode(byte); });
+      return btoa(binary);
+    }
+
+    async function githubJson(url, options) {
+      const response = await fetch(url, options);
+      const text = await response.text();
+      let data = {};
+      try { data = text ? JSON.parse(text) : {}; } catch (error) {}
+      if (!response.ok) {
+        throw new Error(data.message || `HTTP ${response.status}`);
+      }
+      return data;
     }
 
     function buildMarkdown() {
@@ -328,7 +383,7 @@
       if (item.title && !fields.title.value.trim()) fields.title.value = item.title;
       fields.noIndent.checked = item.noIndent;
       fields.content.value = item.body;
-      fields.status.textContent = "已套用模板，可以直接改正文。";
+      setStatus("已套用模板，可以直接改正文。");
       update();
     }
 
@@ -344,31 +399,89 @@
           fields.filename.value = data.filename || "";
           fields.noIndent.checked = Boolean(data.noIndent);
           fields.content.value = data.content || "";
-          update();
-          return;
         } catch (error) {}
+      } else {
+        const now = new Date();
+        fields.date.value = localDateValue(now);
+        fields.filename.value = defaultFileName(now);
+        fields.noIndent.checked = false;
       }
-      const now = new Date();
-      fields.date.value = localDateValue(now);
-      fields.filename.value = defaultFileName(now);
-      fields.noIndent.checked = false;
+      fields.token.value = localStorage.getItem("xiang-github-token") || "";
       update();
     }
 
+    async function publishToGithub() {
+      update();
+      const token = fields.token.value.trim();
+      if (!token) {
+        setStatus("请先填写 GitHub Token。", true);
+        return;
+      }
+
+      const fileName = normalizeFileName(fields.filename.value);
+      fields.filename.value = fileName;
+      const path = `content/${fields.section.value}/${fileName}`;
+      const apiUrl = repoApiBase + encodePath(path);
+      const headers = {
+        "Accept": "application/vnd.github+json",
+        "Authorization": `Bearer ${token}`,
+        "X-GitHub-Api-Version": "2022-11-28"
+      };
+
+      fields.publish.disabled = true;
+      setStatus("正在发布到 GitHub...");
+
+      try {
+        localStorage.setItem("xiang-github-token", token);
+        let sha;
+        try {
+          const existing = await githubJson(`${apiUrl}?ref=${encodeURIComponent(branch)}`, { headers });
+          sha = existing.sha;
+        } catch (error) {
+          if (!String(error.message).includes("Not Found")) throw error;
+        }
+
+        const body = {
+          message: `Publish ${fileName}`,
+          content: toBase64Utf8(buildMarkdown()),
+          branch
+        };
+        if (sha) body.sha = sha;
+
+        await githubJson(apiUrl, {
+          method: "PUT",
+          headers: { ...headers, "Content-Type": "application/json" },
+          body: JSON.stringify(body)
+        });
+
+        setStatus(`发布成功：${path}。GitHub Pages 通常需要几十秒到几分钟更新。`);
+      } catch (error) {
+        setStatus(`发布失败：${error.message}`, true);
+      } finally {
+        fields.publish.disabled = false;
+      }
+    }
+
     fields.applyTemplate.addEventListener("click", applySelectedTemplate);
+    fields.publish.addEventListener("click", publishToGithub);
 
     fields.section.addEventListener("change", () => {
       if (fields.template.value === "auto") fields.noIndent.checked = fields.section.value === "Excerpt";
       update();
     });
 
+    fields.token.addEventListener("input", () => {
+      const token = fields.token.value.trim();
+      if (token) localStorage.setItem("xiang-github-token", token);
+    });
+
     fields.copy.addEventListener("click", async () => {
       update();
       await navigator.clipboard.writeText(fields.preview.textContent);
-      fields.status.textContent = `已复制。GitHub 新文件名填：content/${fields.section.value}/${fields.filename.value.trim() || defaultFileName(new Date())}`;
+      setStatus(`已复制。GitHub 新文件名填：content/${fields.section.value}/${fields.filename.value.trim() || defaultFileName(new Date())}`);
     });
 
-    [fields.section, fields.date, fields.template, fields.title, fields.filename, fields.noIndent, fields.content].forEach((field) => {
+    [fields.section, fields.date, fields.template, fields.title, fields.filename, fields.token, fields.noIndent, fields.content].forEach((field) => {
       field.addEventListener("input", update);
       field.addEventListener("change", update);
     });
