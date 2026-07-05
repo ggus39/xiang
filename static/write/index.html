@@ -106,6 +106,11 @@
 
     .inline-check input { width: auto; }
 
+    .inline-check.compact {
+      margin-top: 8px;
+      font-size: 13px;
+    }
+
     .hint {
       margin-top: 6px;
       color: var(--muted);
@@ -197,6 +202,10 @@
         <div>
           <label for="date">日期时间</label>
           <input id="date" type="datetime-local">
+          <label class="inline-check compact" for="liveDate">
+            <input id="liveDate" type="checkbox" checked>
+            <span>使用实时当前时间</span>
+          </label>
         </div>
       </div>
 
@@ -282,6 +291,7 @@
     const fields = {
       section: document.getElementById("section"),
       date: document.getElementById("date"),
+      liveDate: document.getElementById("liveDate"),
       template: document.getElementById("template"),
       title: document.getElementById("title"),
       filename: document.getElementById("filename"),
@@ -370,6 +380,7 @@
       localStorage.setItem("xiang-writer", JSON.stringify({
         section: fields.section.value,
         date: fields.date.value,
+        liveDate: fields.liveDate.checked,
         template: fields.template.value,
         title: fields.title.value,
         filename: fields.filename.value,
@@ -393,7 +404,8 @@
         try {
           const data = JSON.parse(saved);
           fields.section.value = data.section || "thoughts";
-          fields.date.value = data.date || localDateValue(new Date());
+          fields.liveDate.checked = data.liveDate !== false;
+          fields.date.value = fields.liveDate.checked ? localDateValue(new Date()) : (data.date || localDateValue(new Date()));
           fields.template.value = data.template || "auto";
           fields.title.value = data.title || "";
           fields.filename.value = data.filename || "";
@@ -402,6 +414,7 @@
         } catch (error) {}
       } else {
         const now = new Date();
+        fields.liveDate.checked = true;
         fields.date.value = localDateValue(now);
         fields.filename.value = defaultFileName(now);
         fields.noIndent.checked = false;
@@ -462,6 +475,24 @@
       }
     }
 
+
+    function syncLiveDate() {
+      if (!fields.liveDate.checked) return;
+      fields.date.value = localDateValue(new Date());
+      update();
+    }
+
+    setInterval(syncLiveDate, 30000);
+
+    fields.liveDate.addEventListener("change", () => {
+      if (fields.liveDate.checked) syncLiveDate();
+      update();
+    });
+
+    fields.date.addEventListener("input", () => {
+      fields.liveDate.checked = false;
+      update();
+    });
     fields.applyTemplate.addEventListener("click", applySelectedTemplate);
     fields.publish.addEventListener("click", publishToGithub);
 
@@ -481,12 +512,13 @@
       setStatus(`已复制。GitHub 新文件名填：content/${fields.section.value}/${fields.filename.value.trim() || defaultFileName(new Date())}`);
     });
 
-    [fields.section, fields.date, fields.template, fields.title, fields.filename, fields.token, fields.noIndent, fields.content].forEach((field) => {
+    [fields.section, fields.template, fields.title, fields.filename, fields.token, fields.noIndent, fields.content].forEach((field) => {
       field.addEventListener("input", update);
       field.addEventListener("change", update);
     });
 
     restore();
+    syncLiveDate();
   </script>
 </body>
 </html>
