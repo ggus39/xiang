@@ -341,6 +341,11 @@ body {
     box-shadow: none;
 }
 
+.archive-main-card {
+    min-height: 315px;
+    padding: 30px;
+}
+
 .archive-card-no {
     color: var(--secondary);
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -350,7 +355,7 @@ body {
 .archive-card h3 {
     margin: 28px 0 10px;
     color: var(--primary);
-    font-size: 21px;
+    font-size: 24px;
     letter-spacing: -0.02em;
 }
 
@@ -358,31 +363,30 @@ body {
     margin: 0;
     color: var(--secondary);
     font-size: 14px;
-    line-height: 1.8;
+    line-height: 1.9;
+}
+
+.archive-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 22px;
+}
+
+.archive-card-tags span {
+    padding: 5px 9px;
+    border-radius: 999px;
+    background: var(--code-bg);
+    color: var(--secondary);
+    font-size: 12px;
 }
 
 .archive-card-link {
     margin-top: auto;
-    padding-top: 22px;
+    padding-top: 24px;
     color: var(--primary);
     font-size: 13px;
     font-weight: 650;
-}
-
-.archive-old-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px 14px;
-    margin-top: 18px;
-    color: var(--secondary);
-    font-size: 13px;
-}
-
-.archive-old-links a {
-    color: var(--primary);
-    text-decoration: underline;
-    text-decoration-color: var(--tertiary);
-    text-underline-offset: 4px;
 }
 
 .archive-latest {
@@ -391,7 +395,7 @@ body {
 
 .archive-latest-item {
     display: grid;
-    grid-template-columns: 128px 1fr;
+    grid-template-columns: 150px 1fr;
     gap: 5px 22px;
     padding: 20px 4px;
     border-bottom: 1px solid var(--border);
@@ -459,6 +463,86 @@ body {
     font-weight: 650;
 }
 
+/* 一级大标签页 */
+.hub-page {
+    display: grid;
+    gap: 52px;
+    padding: 6px 0 28px;
+}
+
+.hub-header {
+    padding: 38px 0 6px;
+}
+
+.hub-header h1 {
+    margin: 0 0 14px;
+    color: var(--primary);
+    font-size: clamp(40px, 7vw, 58px);
+    letter-spacing: -0.045em;
+}
+
+.hub-header > p:not(.archive-section-kicker) {
+    max-width: 650px;
+    margin: 0;
+    color: var(--secondary);
+    font-size: 16px;
+    line-height: 1.95;
+}
+
+.hub-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.hub-card {
+    display: flex;
+    min-height: 210px;
+    flex-direction: column;
+    padding: 26px;
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    color: inherit;
+    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+
+.hub-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--tertiary);
+    box-shadow: 0 14px 34px rgba(42, 39, 31, 0.07);
+}
+
+[data-theme="dark"] .hub-card:hover {
+    box-shadow: none;
+}
+
+.hub-card h2 {
+    margin: 28px 0 9px;
+    color: var(--primary);
+    font-size: 21px;
+    letter-spacing: -0.02em;
+}
+
+.hub-card p {
+    margin: 0;
+    color: var(--secondary);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.hub-card-link {
+    margin-top: auto;
+    padding-top: 20px;
+    color: var(--primary);
+    font-size: 13px;
+    font-weight: 650;
+}
+
+.hub-recent {
+    padding-top: 8px;
+}
+
 @media (max-width: 768px) {
     :root {
         --gap: 22px;
@@ -507,13 +591,19 @@ body {
         text-align: left;
     }
 
-    .archive-grid {
+    .archive-grid,
+    .hub-grid {
         grid-template-columns: 1fr;
     }
 
-    .archive-card {
+    .archive-card,
+    .hub-card {
         min-height: 205px;
         padding: 22px;
+    }
+
+    .archive-main-card {
+        min-height: 260px;
     }
 
     .archive-latest-item {
@@ -536,5 +626,13 @@ body {
 
     .archive-time blockquote {
         font-size: 24px;
+    }
+
+    .hub-page {
+        gap: 42px;
+    }
+
+    .hub-header {
+        padding-top: 26px;
     }
 }

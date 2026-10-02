@@ -4,83 +4,66 @@
   <section class="archive-hero">
     <p class="archive-kicker">PERSONAL THINKING ARCHIVE · 个人思考档案</p>
     <h1 class="archive-title">Xiang <em>· 想</em></h1>
-    <p class="archive-lead">记录想法、对话和变化。</p>
+    <p class="archive-lead">记录想法、生活和变化。</p>
     <p class="archive-intro">
-      不追求高频更新，也不急着留下标准答案。这里更像一个长期公开的个人思考档案：
-      记录某个阶段我在想什么、为什么这样想，以及这些想法后来怎样发生变化。
+      不追求高频更新，也不急着留下标准答案。
+      这里更像一个长期公开的个人思考档案：一边记录正在发生的生活，一边保留那些值得多想一点的问题。
     </p>
     <div class="archive-actions">
-      <a class="archive-button archive-button-primary" href="{{ "thoughts/" | relURL }}">开始阅读</a>
-      <a class="archive-button" href="{{ "about/" | relURL }}">关于这个网站</a>
+      <a class="archive-button archive-button-primary" href="{{ "notes/" | relURL }}">个人小记</a>
+      <a class="archive-button" href="{{ "thinking/" | relURL }}">小小思考</a>
     </div>
     <div class="archive-topics" aria-label="长期记录主题">
-      <span>工作</span>
       <span>生活</span>
+      <span>复盘</span>
       <span>AI</span>
-      <span>阅读</span>
-      <span>金钱与投资</span>
-      <span>认知变化</span>
+      <span>学习</span>
+      <span>财务投资</span>
+      <span>工作成长</span>
     </div>
   </section>
 
   <section class="archive-section">
     <div class="archive-section-head">
       <div>
-        <p class="archive-section-kicker">INDEX</p>
-        <h2>这里会记录什么</h2>
+        <p class="archive-section-kicker">TWO PATHS</p>
+        <h2>两种记录</h2>
       </div>
-      <p>不是严格的知识分类，而是几条会长期生长的线。</p>
+      <p>先分清是在记录“经历了什么”，还是在记录“我在想什么”。</p>
     </div>
 
-    <div class="archive-grid">
-      <a class="archive-card" href="{{ "thoughts/" | relURL }}">
+    <div class="archive-grid archive-main-grid">
+      <a class="archive-card archive-main-card" href="{{ "notes/" | relURL }}">
         <span class="archive-card-no">01</span>
-        <h3>想法</h3>
-        <p>关于工作、生活、金钱、社会和人与人之间关系，也包括那些暂时还没想明白的问题。</p>
-        <span class="archive-card-link">进入 →</span>
+        <h3>个人小记</h3>
+        <p>
+          日常、周月回看、习惯、摘句与零碎记录。
+          有些事情不需要得出结论，只需要把当时留下来。
+        </p>
+        <div class="archive-card-tags">
+          <span>周月记</span>
+          <span>随笔记录</span>
+          <span>习惯</span>
+          <span>摘句</span>
+        </div>
+        <span class="archive-card-link">看看最近的生活 →</span>
       </a>
 
-      <a class="archive-card" href="{{ "ai/" | relURL }}">
+      <a class="archive-card archive-main-card" href="{{ "thinking/" | relURL }}">
         <span class="archive-card-no">02</span>
-        <h3>与 AI 的对话</h3>
-        <p>保留值得回看的长对话。重点不是 AI 给了什么答案，而是问题怎样被追问、修正和重新理解。</p>
-        <span class="archive-card-link">进入 →</span>
+        <h3>小小思考</h3>
+        <p>
+          AI、财务投资、学习、工作，以及那些暂时没有答案的问题。
+          不急着下结论，先把问题和变化留下来。
+        </p>
+        <div class="archive-card-tags">
+          <span>AI</span>
+          <span>财务投资</span>
+          <span>学习</span>
+          <span>工作成长</span>
+        </div>
+        <span class="archive-card-link">继续想一想 →</span>
       </a>
-
-      <a class="archive-card" href="{{ "reading/" | relURL }}">
-        <span class="archive-card-no">03</span>
-        <h3>阅读与学习</h3>
-        <p>书、文章和资料带来的记录：我从里面看到了什么，以及它改变了哪些原来的想法。</p>
-        <span class="archive-card-link">进入 →</span>
-      </a>
-
-      <a class="archive-card" href="{{ "work/" | relURL }}">
-        <span class="archive-card-no">04</span>
-        <h3>工作与成长</h3>
-        <p>技术学习、工作经历、能力建设和阶段复盘。记录从“会做”到“理解为什么”的过程。</p>
-        <span class="archive-card-link">进入 →</span>
-      </a>
-
-      <a class="archive-card" href="{{ "finance/" | relURL }}">
-        <span class="archive-card-no">05</span>
-        <h3>金钱与投资</h3>
-        <p>记录自己逐渐理解金钱、资产、投资与风险的过程，不预测市场，只保留认知建立的轨迹。</p>
-        <span class="archive-card-link">进入 →</span>
-      </a>
-
-      <a class="archive-card" href="{{ "journals/" | relURL }}">
-        <span class="archive-card-no">06</span>
-        <h3>周月记</h3>
-        <p>阶段性的回看。把那些容易被时间冲淡的经历、状态和变化，尽量留下来。</p>
-        <span class="archive-card-link">进入 →</span>
-      </a>
-    </div>
-
-    <div class="archive-old-links">
-      <span>旧栏目仍然保留：</span>
-      <a href="{{ "posts/" | relURL }}">随笔与记录</a>
-      <a href="{{ "habits/" | relURL }}">习惯</a>
-      <a href="{{ "Excerpt/" | relURL }}">阅读摘句</a>
     </div>
   </section>
 
@@ -90,13 +73,23 @@
         <p class="archive-section-kicker">LATEST</p>
         <h2>最近更新</h2>
       </div>
-      <p>按时间留下当时的自己，而不是回头把过去修得太正确。</p>
+      <p>全部按时间放在一起。几年后回头看，时间本身也会成为内容。</p>
     </div>
 
     {{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections -}}
     <div class="archive-latest">
-      {{- $labels := dict "thoughts" "想法" "ai" "AI 对话" "reading" "阅读" "work" "工作" "finance" "金钱与投资" "journals" "周月记" "posts" "随笔" "Excerpt" "摘句" "habits" "习惯" -}}
-      {{- range first 6 $pages.ByDate.Reverse }}
+      {{- $labels := dict
+        "thoughts" "小小思考 · 想法"
+        "ai" "小小思考 · AI"
+        "reading" "小小思考 · 学习"
+        "work" "小小思考 · 工作成长"
+        "finance" "小小思考 · 财务投资"
+        "journals" "个人小记 · 周月记"
+        "posts" "个人小记 · 随笔记录"
+        "Excerpt" "个人小记 · 摘句"
+        "habits" "个人小记 · 习惯"
+      -}}
+      {{- range first 8 $pages.ByDate.Reverse }}
       {{- $label := index $labels .Section | default .Section }}
       <a class="archive-latest-item" href="{{ .RelPermalink }}">
         <div class="archive-latest-meta">
@@ -112,14 +105,13 @@
 
   <section class="archive-time">
     <p class="archive-section-kicker">TIMELINE</p>
-    <blockquote>
-      “原来我以前是这样想的。”
-    </blockquote>
+    <blockquote>“原来我以前是这样想的。”</blockquote>
     <p>
-      如果这个网站能持续很多年，真正有意思的可能不是某一篇文章，而是同一个人面对工作、金钱、
-      技术、关系和世界时，观点怎样一点点改变。
+      我不太想把这里变成一个输出正确答案的地方。
+      如果很多年后再回来，更希望看到的是同一个人面对生活、工作、金钱和技术时，
+      认知怎样一点点形成，又怎样因为新的经历发生变化。
     </p>
-    <a href="{{ "about/" | relURL }}">为什么要做这件事 →</a>
+    <a href="{{ "about/" | relURL }}">关于这个网站 →</a>
   </section>
 </div>
 

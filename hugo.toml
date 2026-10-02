@@ -5,7 +5,7 @@ theme = "PaperMod"
 
 [params]
     env = "production"
-    description = "一个长期公开的个人思考档案。记录想法、对话、阅读、工作与认知变化。"
+    description = "一个长期公开的个人思考档案。记录想法、生活和变化。"
     defaultTheme = "auto"
     DateFormat = "2006年01月02日"
     ShowReadingTime = true
@@ -16,29 +16,24 @@ theme = "PaperMod"
 
 [params.homeInfoParams]
     Title = "Xiang · 想"
-    Content = "记录想法、对话和变化。这里不追求高频更新、热点或标准答案，更想留下一个人的认知是怎样慢慢发生变化的。"
+    Content = "记录想法、生活和变化。"
 
 [[menu.main]]
     name = "进入网站"
-    url = "/#latest"
+    url = "/"
     weight = 5
 
 [[menu.main]]
-    name = "想法"
-    url = "/thoughts/"
+    name = "个人小记"
+    url = "/notes/"
     weight = 10
 
 [[menu.main]]
-    name = "AI 对话"
-    url = "/ai/"
+    name = "小小思考"
+    url = "/thinking/"
     weight = 20
-
-[[menu.main]]
-    name = "阅读"
-    url = "/reading/"
-    weight = 30
 
 [[menu.main]]
     name = "关于我"
     url = "/about/"
-    weight = 40
+    weight = 30

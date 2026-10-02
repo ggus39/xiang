@@ -1,0 +1,73 @@
+{{- define "main" }}
+
+<section class="hub-page">
+  <header class="hub-header">
+    <p class="archive-section-kicker">SMALL THOUGHTS</p>
+    <h1>小小思考</h1>
+    <p>不急着找到答案。先把问题留下来，再看看自己的理解会怎么变化。</p>
+  </header>
+
+  <div class="hub-grid">
+    <a class="hub-card" href="{{ "ai/" | relURL }}">
+      <span class="archive-card-no">01</span>
+      <h2>AI</h2>
+      <p>不只记录答案，更想留下我是怎么提问、追问和重新理解一个问题的。</p>
+      <span class="hub-card-link">进入 →</span>
+    </a>
+
+    <a class="hub-card" href="{{ "finance/" | relURL }}">
+      <span class="archive-card-no">02</span>
+      <h2>财务投资</h2>
+      <p>关于钱、资产、投资和风险，记录自己的财务认知怎样一点点建立起来。</p>
+      <span class="hub-card-link">进入 →</span>
+    </a>
+
+    <a class="hub-card" href="{{ "reading/" | relURL }}">
+      <span class="archive-card-no">03</span>
+      <h2>学习</h2>
+      <p>读书、资料、新领域和学习过程中产生的问题与理解。</p>
+      <span class="hub-card-link">进入 →</span>
+    </a>
+
+    <a class="hub-card" href="{{ "work/" | relURL }}">
+      <span class="archive-card-no">04</span>
+      <h2>工作成长</h2>
+      <p>工作、技术、职业和能力，记录自己从“会做”慢慢走向“知道为什么”。</p>
+      <span class="hub-card-link">进入 →</span>
+    </a>
+  </div>
+
+  <section class="hub-recent">
+    <div class="archive-section-head">
+      <div>
+        <p class="archive-section-kicker">LATEST</p>
+        <h2>最近在想</h2>
+      </div>
+      <p>允许没有结论，也允许以后改变。</p>
+    </div>
+
+    {{- $sections := slice "thoughts" "ai" "finance" "reading" "work" -}}
+    {{- $pages := where site.RegularPages "Section" "in" $sections -}}
+    {{- $labels := dict
+      "thoughts" "想法"
+      "ai" "AI"
+      "finance" "财务投资"
+      "reading" "学习"
+      "work" "工作成长"
+    -}}
+    <div class="archive-latest">
+      {{- range first 8 $pages.ByDate.Reverse }}
+      <a class="archive-latest-item" href="{{ .RelPermalink }}">
+        <div class="archive-latest-meta">
+          <span>{{ index $labels .Section | default .Section }}</span>
+          <time>{{ .Date.Format "2006.01.02" }}</time>
+        </div>
+        <h3>{{ .Title }}</h3>
+        <p>{{ .Summary | plainify | htmlUnescape | truncate 120 }}</p>
+      </a>
+      {{- end }}
+    </div>
+  </section>
+</section>
+
+{{- end }}

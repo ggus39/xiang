@@ -1,0 +1,72 @@
+{{- define "main" }}
+
+<section class="hub-page">
+  <header class="hub-header">
+    <p class="archive-section-kicker">PERSONAL NOTES</p>
+    <h1>个人小记</h1>
+    <p>生活未必每一天都值得总结，但有些阶段值得留下来。这里放日常、复盘、习惯，以及一些不需要想得太复杂的记录。</p>
+  </header>
+
+  <div class="hub-grid">
+    <a class="hub-card" href="{{ "journals/" | relURL }}">
+      <span class="archive-card-no">01</span>
+      <h2>周月记</h2>
+      <p>把一段时间拉远一点，再看看自己最近到底在干什么。</p>
+      <span class="hub-card-link">进入 →</span>
+    </a>
+
+    <a class="hub-card" href="{{ "posts/" | relURL }}">
+      <span class="archive-card-no">02</span>
+      <h2>随笔记录</h2>
+      <p>不需要严格分类的日常、备忘和零碎记录。</p>
+      <span class="hub-card-link">进入 →</span>
+    </a>
+
+    <a class="hub-card" href="{{ "habits/" | relURL }}">
+      <span class="archive-card-no">03</span>
+      <h2>习惯</h2>
+      <p>关于运动、生活、自我管理，以及那些想慢慢养成的东西。</p>
+      <span class="hub-card-link">进入 →</span>
+    </a>
+
+    <a class="hub-card" href="{{ "Excerpt/" | relURL }}">
+      <span class="archive-card-no">04</span>
+      <h2>摘句</h2>
+      <p>书、播客、文章和生活里，偶尔让自己停一下的句子。</p>
+      <span class="hub-card-link">进入 →</span>
+    </a>
+  </div>
+
+  <section class="hub-recent">
+    <div class="archive-section-head">
+      <div>
+        <p class="archive-section-kicker">LATEST</p>
+        <h2>最近的小记</h2>
+      </div>
+      <p>按时间留下当时的状态，不要求每次都写得完整。</p>
+    </div>
+
+    {{- $sections := slice "journals" "posts" "habits" "Excerpt" -}}
+    {{- $pages := where site.RegularPages "Section" "in" $sections -}}
+    {{- $labels := dict
+      "journals" "周月记"
+      "posts" "随笔记录"
+      "habits" "习惯"
+      "Excerpt" "摘句"
+    -}}
+    <div class="archive-latest">
+      {{- range first 8 $pages.ByDate.Reverse }}
+      <a class="archive-latest-item" href="{{ .RelPermalink }}">
+        <div class="archive-latest-meta">
+          <span>{{ index $labels .Section | default .Section }}</span>
+          <time>{{ .Date.Format "2006.01.02" }}</time>
+        </div>
+        <h3>{{ .Title }}</h3>
+        <p>{{ .Summary | plainify | htmlUnescape | truncate 120 }}</p>
+      </a>
+      {{- end }}
+    </div>
+  </section>
+</section>
+
+{{- end }}
