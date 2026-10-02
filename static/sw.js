@@ -1,4 +1,4 @@
-const CACHE_NAME = "xiang-app-v1";
+const CACHE_NAME = "xiang-app-v2";
 const BASE_PATH = "/xiang/";
 const APP_SHELL = [
   BASE_PATH,
